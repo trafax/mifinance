@@ -22,7 +22,13 @@
 
             <div class="card mb-4">
                 <div class="card-header d-flex">
-                    <div>Bonnetjes</div>
+                    <div class="h4 mt-1">Bonnetjes</div>
+                    <div class="w-25 ml-4 pl-4">
+                        <form method="post" action="{{ route('receipt.search') }}">
+                            @csrf
+                            <input type="text" name="search" placeholder="Zoeken..." class="form-control">
+                        </form>
+                    </div>
                     <div class="ml-auto">Totaal € {{ number_format(App\Receipt::all()->sum('price'), 2) }}</div>
                 </div>
 

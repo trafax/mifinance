@@ -21,5 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('receipt', 'ReceiptController');
+    Route::post('receipt/search', 'ReceiptController@index')->name('receipt.search');
     Route::resource('group', 'GroupController');
 });

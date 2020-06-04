@@ -14,10 +14,16 @@ class ReceiptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $groups = Group::orderBy('title', 'ASC')->get();
-        $receipts = Receipt::orderBy('date', 'DESC')->paginate(50);
+        if ($request->get('search')) {
+            $receipts = Receipt::with('group')->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%")->orWhereHas('group', function($q) use ($request) {
+                $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%");
+            })->orderBy('date', 'DESC')->paginate(50);
+        } else {
+            $receipts = Receipt::orderBy('date', 'DESC')->paginate(50);
+        }
 
         return view('receipt_index')->with([
             'groups' => $groups,
