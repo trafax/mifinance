@@ -86,6 +86,8 @@
                                 maxDate: '+30d',
                                 numberOfMonths: 3,
                                 dateFormat: "yy-mm-dd",
+                                changeMonth: true,
+                                changeYear: true,
                                 onSelect: function(date){
                                     $('[name="date"]').val(date);
                                 }
