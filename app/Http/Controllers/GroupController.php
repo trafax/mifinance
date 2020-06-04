@@ -15,7 +15,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::orderBy('title', 'ASC')->get();
+        $groups = Group::orderBy('title', 'ASC')->paginate(5);
         return view('group_index')->with([
             'groups' => $groups
         ]);

@@ -6,6 +6,9 @@
         <div class="col-md-12">
 
             <div class="d-flex mb-4">
+
+                {!! $receipts->links() !!}
+
                 <div class="ml-auto">
                     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#create">Bonnetje toevoegen</a>
                 </div>
@@ -17,10 +20,10 @@
                 </div>
             @endif
 
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-header d-flex">
                     <div>Bonnetjes</div>
-                    <div class="ml-auto">Totaal € {{ number_format($receipts->sum('price'), 2) }}</div>
+                    <div class="ml-auto">Totaal € {{ number_format(App\Receipt::all()->sum('price'), 2) }}</div>
                 </div>
 
                 <div class="card-body">
@@ -46,12 +49,15 @@
                     <div class="d-flex py-2 mt-4">
                         <div class="flex-grow-1 h3">Totaal</div>
                         <div class="text-right w-25">
-                            <span class="h3">€ {{ number_format($receipts->sum('price'), 2) }}</span>
+                            <span class="h3">€ {{ number_format(App\Receipt::all()->sum('price'), 2) }}</span>
                         </div>
                     </div>
 
                 </div>
             </div>
+
+            {!! $receipts->links() !!}
+
         </div>
     </div>
 </div>

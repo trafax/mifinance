@@ -6,6 +6,9 @@
         <div class="col-md-12">
 
             <div class="d-flex mb-4">
+
+                {!! $groups->links() !!}
+
                 <div class="ml-auto">
                     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#create">Groep toevoegen</a>
                 </div>
@@ -17,7 +20,7 @@
                 </div>
             @endif
 
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-header d-flex">
                     <div>Groepen</div>
                     <div class="ml-auto">Totaal € {{ number_format(App\Group::with('receipts')->get()->pluck('receipts')->collapse()->sum('price'), 2) }}</div>
@@ -57,6 +60,9 @@
 
                 </div>
             </div>
+
+            {!! $groups->links() !!}
+
         </div>
     </div>
 </div>

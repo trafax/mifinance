@@ -17,7 +17,7 @@ class ReceiptController extends Controller
     public function index()
     {
         $groups = Group::orderBy('title', 'ASC')->get();
-        $receipts = Receipt::orderBy('date')->get();
+        $receipts = Receipt::orderBy('date', 'DESC')->paginate(25);
 
         return view('receipt_index')->with([
             'groups' => $groups,
