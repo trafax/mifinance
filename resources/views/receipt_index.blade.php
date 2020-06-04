@@ -18,7 +18,10 @@
             @endif
 
             <div class="card">
-                <div class="card-header">Bonnetjes</div>
+                <div class="card-header d-flex">
+                    <div>Bonnetjes</div>
+                    <div class="ml-auto">Totaal € {{ number_format($receipts->sum('price'), 2) }}</div>
+                </div>
 
                 <div class="card-body">
 

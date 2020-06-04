@@ -18,7 +18,10 @@
             @endif
 
             <div class="card">
-                <div class="card-header">Groepen</div>
+                <div class="card-header d-flex">
+                    <div>Groepen</div>
+                    <div class="ml-auto">Totaal € {{ number_format(App\Group::with('receipts')->get()->pluck('receipts')->collapse()->sum('price'), 2) }}</div>
+                </div>
 
                 <div class="card-body">
 
@@ -37,6 +40,20 @@
                             </div>
                         </div>
                     @endforeach
+
+                    <div class="d-flex py-2 mt-4">
+                        <div class="flex-grow-1 h3">Totaal</div>
+                        <div class="text-right w-25">
+                            <span class="h3">
+                                € {{ number_format(App\Group::with('receipts')->get()->pluck('receipts')->collapse()->sum('price'), 2) }}
+                            </span>
+                        </div>
+                        <div class="text-right w-25">
+                            <span class="h3">
+                                {{ App\Group::with('receipts')->get()->pluck('receipts')->collapse()->count() }}
+                            </span>
+                        </div>
+                    </div>
 
                 </div>
             </div>
