@@ -30,7 +30,7 @@
                                 <div id="row_{{ $group->id }}" class="d-inline ml-2" data-original-content="{{ $group->title }}">{{ $group->title }}</div>
                             </div>
                             <div class="text-right w-25">
-                                <label class="h3 mb-0">€ {{ $group->receipts->sum('price') }}</label> <span class="d-block text-muted">Uitgegeven</span>
+                                <label class="h3 mb-0">€ {{ number_format($group->receipts->sum('price'), 2) }}</label> <span class="d-block text-muted">Uitgegeven</span>
                             </div>
                             <div class="text-right w-25">
                                 <label class="h3 mb-0">{{ $group->receipts->count() }}</label> <span class="d-block text-muted">Bonnetjes</span>

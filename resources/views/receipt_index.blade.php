@@ -30,15 +30,12 @@
                                 <div class="ml-2 d-inline">{{ date('d-m-Y', strtotime($receipt->date)) }}</div>
                             </div>
                             <div class="flex-grow-1 w-50">
-
-                                {{-- <a href="javascript:;" onclick="window.edit('{{ $group->id }}')"><i class="far fa-edit"></i></a>
-                                <a href="javascript:;" onclick="window.delete('{{ $group->id }}')"><i class="far fa-minus-circle"></i></a> --}}
                                 <div class="d-inline">{{ $receipt->title }}
                                     <div class="d-block text-muted">{{ $receipt->group->title }}</div>
                                 </div>
                             </div>
                             <div class="text-right flex-grow-1 h5 mt-2">
-                                € {{ $receipt->price }}
+                                € {{ number_format($receipt->price, 2) }}
                             </div>
                         </div>
                     @endforeach
@@ -46,7 +43,7 @@
                     <div class="d-flex py-2 mt-4">
                         <div class="flex-grow-1 h3">Totaal</div>
                         <div class="text-right w-25">
-                            <span class="h3">€ {{ $receipts->sum('price') }}</span>
+                            <span class="h3">€ {{ number_format($receipts->sum('price'), 2) }}</span>
                         </div>
                     </div>
 
