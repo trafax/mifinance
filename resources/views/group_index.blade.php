@@ -38,16 +38,6 @@
                         </div>
                     @endforeach
 
-                    <div class="d-flex py-2 mt-4">
-                        <div class="flex-grow-1 h3">Totaal</div>
-                        <div class="text-right w-25">
-                            <label class="h3 mb-0">€ 0,00</label> <span class="d-block text-muted">Uitgegeven</span>
-                        </div>
-                        <div class="text-right w-25">
-                            <label class="h3 mb-0">0</label> <span class="d-block text-muted">Bonnetjes</span>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
