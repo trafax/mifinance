@@ -24,7 +24,7 @@
                 <div class="card-header d-flex">
                     <div class="h4 mt-1">Bonnetjes</div>
                     <div class="w-25 ml-4 pl-4">
-                        <form method="post" action="{{ route('receipt.search') }}">
+                        <form method="get" action="{{ route('receipt.search') }}">
                             @csrf
                             <input type="text" name="search" placeholder="Zoeken..." class="form-control">
                         </form>
