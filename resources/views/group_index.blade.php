@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="text" name="type" value="{{  array_key_first(request()->all()) }}">
+                    <input type="hidden" name="type" value="{{  array_key_first(request()->all()) }}">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit</button>
                     <button type="submit" class="btn btn-primary">Groep opslaan</button>
                 </div>
