@@ -18,3 +18,8 @@ Route::get('/', 'Auth\LoginController@showLoginForm');
 Auth::routes(['register' => FALSE]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('receipt', 'ReceiptController');
+    Route::resource('group', 'GroupController');
+});
