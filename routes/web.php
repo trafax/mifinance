@@ -20,7 +20,7 @@ Auth::routes(['register' => FALSE]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::match(['get', 'post'], 'receipt/search', 'ReceiptController@index')->name('receipt.search');
     Route::resource('receipt', 'ReceiptController');
-    Route::post('receipt/search', 'ReceiptController@index')->name('receipt.search');
     Route::resource('group', 'GroupController');
 });
