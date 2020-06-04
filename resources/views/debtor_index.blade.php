@@ -7,10 +7,8 @@
 
             <div class="d-flex mb-4">
 
-                {{-- {!! $groups->links() !!} --}}
-
                 <div class="ml-auto">
-                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#create">Groep toevoegen</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#create">Debiteur toevoegen</a>
                 </div>
             </div>
 
@@ -22,46 +20,27 @@
 
             <div class="card mb-4">
                 <div class="card-header d-flex">
-                    <div>Groepen</div>
-                    <div class="ml-auto">Totaal € {{ $total }}</div>
+                    <div class="h4 mt-1">Debiteuren</div>
                 </div>
 
                 <div class="card-body">
 
-                    @foreach($groups as $group)
+                    @foreach($debtors as $debtor)
                         <div class="d-flex py-2 border-bottom">
-                            <div class="flex-grow-1">
-                                <a href="javascript:;" onclick="window.edit('{{ $group->id }}')"><i class="far fa-edit"></i></a>
-                                <a href="javascript:;" onclick="window.delete('{{ $group->id }}')"><i class="far fa-minus-circle"></i></a>
-                                <div id="row_{{ $group->id }}" class="d-inline ml-2" data-original-content="{{ $group->title }}">{{ $group->title }}</div>
+                            <div class="w-25">
+                                <a href="javascript:;" onclick="window.edit('{{ $debtor->id }}')"><i class="far fa-edit"></i></a>
+                                <a href="javascript:;" onclick="window.delete('{{ $debtor->id }}')"><i class="far fa-minus-circle"></i></a>
+                                <div id="row_{{ $debtor->id }}" class="d-inline ml-2" data-original-content="{{ $debtor->title }}">{{ $debtor->title }}</div>
                             </div>
-                            <div class="text-right w-25">
-                                <label class="h3 mb-0">€ {{ number_format($group->receipts->sum('price'), 2) }}</label> <span class="d-block text-muted">Uitgegeven</span>
+                            <div class="text-right flex-grow-1 h5 mt-2">
+                                € 0
+                                <span class="d-block text-muted small">Opgebracht</span>
                             </div>
-                            {{-- <div class="text-right w-25">
-                                <label class="h3 mb-0">{{ $group->receipts->count() }}</label> <span class="d-block text-muted">Bonnetjes</span>
-                            </div> --}}
                         </div>
                     @endforeach
 
-                    <div class="d-flex py-2 mt-4">
-                        <div class="flex-grow-1 h3">Totaal</div>
-                        <div class="text-right w-25">
-                            <span class="h3">
-                                € {{ $total }}
-                            </span>
-                        </div>
-                        {{-- <div class="text-right w-25">
-                            <span class="h3">
-                                {{ App\Group::with('receipts')->get()->pluck('receipts')->collapse()->count() }}
-                            </span>
-                        </div> --}}
-                    </div>
-
                 </div>
             </div>
-
-            {{-- {!! $groups->links() !!} --}}
 
         </div>
     </div>
@@ -70,24 +49,23 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="create">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post" action="{{ route('group.store') }}">
+            <form method="post" action="{{ route('debtor.store') }}">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title">Groep toevoegen</h5>
+                    <h5 class="modal-title">Debiteur toevoegen</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Groepnaam</label>
+                        <label>Naam</label>
                         <input type="text" name="title" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="text" name="type" value="{{  array_key_first(request()->all()) }}">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit</button>
-                    <button type="submit" class="btn btn-primary">Groep opslaan</button>
+                    <button type="submit" class="btn btn-primary">Debiteur opslaan</button>
                 </div>
             </form>
         </div>
@@ -108,7 +86,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "put",
-            url: "/group/"+id,
+            url: "/debtor/"+id,
             data: {title: newValue},
             dataType: "HTML",
             success: function (response) {
@@ -120,13 +98,13 @@
     };
 
     window.delete = function(id) {
-        if (confirm('Groep verwijderen?')) {
+        if (confirm('Debiteur verwijderen?')) {
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: "delete",
-                url: "/group/"+id,
+                url: "/debtor/"+id,
                 dataType: "HTML",
                 success: function (response) {
                     window.location.reload();
@@ -135,4 +113,5 @@
         }
     }
 </script>
+
 @endsection

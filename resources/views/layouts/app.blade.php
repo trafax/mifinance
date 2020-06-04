@@ -36,9 +36,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @if (Auth::user())
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('receipt.index') }}">Bonnetjes</a>
-                            </li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('receipt.index') }}">Bonnetjes</a></li>
                         @endif
                     </ul>
 
@@ -61,7 +60,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('group.index') }}">Uitgave groepen</a>
+                                    <h6 class="dropdown-header">Bonnetjes</h6>
+                                    <a class="dropdown-item" href="{{ route('group.index', 'receipt') }}">Groepen</a>
+                                    <h6 class="dropdown-header">Inkomsten</h6>
+                                    <a class="dropdown-item" href="{{ route('debtor.index') }}">Debiteuren</a>
+                                    <a class="dropdown-item" href="{{ route('group.index', 'income') }}">Groepen</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

@@ -13,11 +13,14 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $groups = Group::orderBy('title', 'ASC')->paginate(50);
+        $groups = Group::where('type', array_key_first($request->all()))->orderBy('title', 'ASC')->get();
+        $total = number_format(Group::where('type', array_key_first($request->all()))->with('receipts')->get()->pluck('receipts')->collapse()->sum('price'), 2);
+
         return view('group_index')->with([
-            'groups' => $groups
+            'groups' => $groups,
+            'total' => $total
         ]);
     }
 

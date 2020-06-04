@@ -16,7 +16,7 @@ class ReceiptController extends Controller
      */
     public function index(Request $request)
     {
-        $groups = Group::orderBy('title', 'ASC')->get();
+        $groups = Group::where('type', 'receipt')->orderBy('title', 'ASC')->get();
         if ($request->get('search')) {
             $receipts = Receipt::with('group')->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%")->orWhereHas('group', function($q) use ($request) {
                 $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%");
@@ -54,7 +54,7 @@ class ReceiptController extends Controller
      */
     public function edit(Receipt $receipt)
     {
-        $groups = Group::orderBy('title', 'ASC')->get();
+        $groups = Group::where('type', 'receipt')->orderBy('title', 'ASC')->get();
 
         return view('receipt_edit')->with([
             'receipt' => $receipt,

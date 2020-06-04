@@ -20,7 +20,10 @@ Auth::routes(['register' => FALSE]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
+
     Route::get('receipt/search', 'ReceiptController@index')->name('receipt.search');
     Route::resource('receipt', 'ReceiptController');
     Route::resource('group', 'GroupController');
+    Route::resource('debtor', 'DebtorController');
+
 });
