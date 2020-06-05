@@ -23,7 +23,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('receipt/search', 'ReceiptController@index')->name('receipt.search');
     Route::resource('receipt', 'ReceiptController');
+
     Route::resource('group', 'GroupController');
+
     Route::resource('debtor', 'DebtorController');
+
+    Route::get('income/search', 'IncomeController@index')->name('income.search');
+    Route::resource('income', 'IncomeController');
 
 });

@@ -26,7 +26,7 @@
                 <div class="card-body">
 
                     @foreach($debtors as $debtor)
-                        <div class="d-flex py-2 border-bottom">
+                        <div class="d-flex py-2 {{ ! $loop->last ? 'border-bottom' : '' }}">
                             <div class="w-25">
                                 <a href="javascript:;" onclick="window.edit('{{ $debtor->id }}')"><i class="far fa-edit"></i></a>
                                 <a href="javascript:;" onclick="window.delete('{{ $debtor->id }}')"><i class="far fa-minus-circle"></i></a>

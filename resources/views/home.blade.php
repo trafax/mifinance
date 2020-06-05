@@ -28,15 +28,15 @@
                                 @foreach ($months as $key => $month)
                                     ['{{ $months[$key] }}',
                                         @foreach ($years as $year)
-                                            {{ App\Receipt::whereRaw('month(date) = ?', ($key+1))->whereRaw('year(date) = ?', $year)->get()->sum('price') }},
+                                            {{ App\Income::whereRaw('month(date) = ?', ($key+1))->whereRaw('year(date) = ?', $year)->get()->sum('price') }},
                                         @endforeach
                                     ],
                                 @endforeach
                             ]);
 
-                            var data = google.visualization.arrayToDataTable([
-                                "Maand"
-                            ]);
+                            // var data = google.visualization.arrayToDataTable([
+                            //     "Maand"
+                            // ]);
 
                             var options = {
                             title : 'Inkomsten',
@@ -49,7 +49,7 @@
                             chart.draw(data, options);
                         }
                     </script>
-                    <div id="inkomsten" style="width: 100%;">In ontwikkeling.</div>
+                    <div id="inkomsten" style="width: 100%;"></div>
 
                 </div>
             </div>
