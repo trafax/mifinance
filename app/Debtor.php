@@ -12,4 +12,9 @@ class Debtor extends Model
     public $fillable = [
         'title'
     ];
+
+    public function incomes()
+    {
+        return $this->hasMany(Income::class);
+    }
 }

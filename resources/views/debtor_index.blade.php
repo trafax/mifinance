@@ -33,7 +33,7 @@
                                 <div id="row_{{ $debtor->id }}" class="d-inline ml-2" data-original-content="{{ $debtor->title }}">{{ $debtor->title }}</div>
                             </div>
                             <div class="text-right flex-grow-1 h5 mt-2">
-                                € 0
+                                <label class="h3 mb-0">€ {{ number_format($debtor->incomes->sum('price'), 2) }}</label>
                                 <span class="d-block text-muted small">Opgebracht</span>
                             </div>
                         </div>

@@ -17,4 +17,9 @@ class Group extends Model
     {
         return $this->hasMany(Receipt::class);
     }
+
+    public function incomes()
+    {
+        return $this->hasMany(Income::class);
+    }
 }

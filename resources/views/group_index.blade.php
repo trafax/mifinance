@@ -29,6 +29,9 @@
                 <div class="card-body">
 
                     @foreach($groups as $group)
+
+                        @php $sum = array_key_first(request()->all()) == 'income' ? $group->incomes->sum('price') : $group->receipts->sum('price'); @endphp
+
                         <div class="d-flex py-2 border-bottom">
                             <div class="flex-grow-1">
                                 <a href="javascript:;" onclick="window.edit('{{ $group->id }}')"><i class="far fa-edit"></i></a>
@@ -36,7 +39,8 @@
                                 <div id="row_{{ $group->id }}" class="d-inline ml-2" data-original-content="{{ $group->title }}">{{ $group->title }}</div>
                             </div>
                             <div class="text-right w-25">
-                                <label class="h3 mb-0">€ {{ number_format($group->receipts->sum('price'), 2) }}</label> <span class="d-block text-muted">Uitgegeven</span>
+                                <label class="h3 mb-0">€ {{ number_format($sum, 2) }}</label>
+                                {{-- <span class="d-block text-muted">Uitgegeven</span> --}}
                             </div>
                             {{-- <div class="text-right w-25">
                                 <label class="h3 mb-0">{{ $group->receipts->count() }}</label> <span class="d-block text-muted">Bonnetjes</span>
