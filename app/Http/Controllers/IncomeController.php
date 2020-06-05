@@ -21,13 +21,16 @@ class IncomeController extends Controller
         $debtors = Debtor::orderBy('title', 'ASC')->get();
 
         if ($request->get('search')) {
-            $incomes = Income::with('group')->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%")->orWhereHas('group', function($q) use ($request) {
-                $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%");
-            })->orWhereHas('debtor', function($q) use ($request) {
-                $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%");
-            })->orderBy('date', 'DESC')->paginate(50)->appends(request()->query());
+            $incomes = Income::with('group')->where(function($q) use ($request) {
+                $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%")->orWhereHas('group', function($q) use ($request) {
+                    $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%");
+                })->orWhereHas('debtor', function($q) use ($request) {
+                    $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%");
+                });
+            })->whereRaw('YEAR(date) = ?', session()->get('bookyear') ?? date('Y'))
+            ->orderBy('date', 'DESC')->paginate(50)->appends(request()->query());
         } else {
-            $incomes = Income::orderBy('date', 'DESC')->paginate(50);
+            $incomes = Income::whereRaw('YEAR(date) = ?', session()->get('bookyear') ?? date('Y'))->orderBy('date', 'DESC')->paginate(50);
         }
 
         return view('income_index')->with([

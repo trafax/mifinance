@@ -16,6 +16,7 @@ class DebtorController extends Controller
     public function index()
     {
         $debtors = Debtor::orderBy('title', 'ASC')->get();
+
         return view('debtor_index')->with([
             'debtors' => $debtors
         ]);

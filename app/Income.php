@@ -18,7 +18,7 @@ class Income extends Model
         return $this->belongsTo(Group::class);
     }
 
-    public function debtor()
+    public function debtor($year = null)
     {
         return $this->belongsTo(Debtor::class);
     }

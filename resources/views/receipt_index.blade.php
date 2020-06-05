@@ -55,7 +55,7 @@
                     <div class="d-flex py-2 mt-4">
                         <div class="flex-grow-1 h3">Totaal</div>
                         <div class="text-right w-25">
-                            <span class="h3">€ {{ number_format(App\Receipt::all()->sum('price'), 2) }}</span>
+                            <span class="h3">€ {{ number_format(App\Receipt::whereRaw('YEAR(date) = ?', session()->get('bookyear') ?? date('Y'))->get()->sum('price'), 2) }}</span>
                         </div>
                     </div>
 

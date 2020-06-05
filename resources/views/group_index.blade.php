@@ -30,7 +30,7 @@
 
                     @foreach($groups as $group)
 
-                        @php $sum = array_key_first(request()->all()) == 'income' ? $group->incomes->sum('price') : $group->receipts->sum('price'); @endphp
+                        @php $sum = array_key_first(request()->all()) == 'income' ? $group->incomes(session()->get('bookyear') ?? date('Y'))->sum('price') : $group->receipts(session()->get('bookyear') ?? date('Y'))->sum('price'); @endphp
 
                         <div class="d-flex py-2 border-bottom">
                             <div class="flex-grow-1">

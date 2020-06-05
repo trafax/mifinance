@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +27,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Artisan::call('migrate', array('--path' => 'database/migrations'));
+
+        View::composer(
+            '*', 'App\Http\View\Composers\VariableComposer'
+        );
     }
 }

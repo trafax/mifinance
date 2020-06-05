@@ -55,6 +55,17 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item form-inline text-muted">
+                                Selecteer boekjaar:
+                                <form method="post" action="{{ route('home.setBookYear') }}" id="setBookYear">
+                                    @csrf
+                                    <select class="form-control ml-3 mr-2" name="year" onchange="$('#setBookYear').submit()">
+                                        @foreach ($bookyears as $bookyear)
+                                            <option {{ (session()->get('bookyear') ?? date('Y')) == $bookyear ? 'selected' : '' }} value="{{ $bookyear }}">{{ $bookyear }}</option>
+                                        @endforeach
+                                    </select>
+                                </form>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Instellingen

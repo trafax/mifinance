@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::post('home/bookyear', 'HomeController@setBookYear')->name('home.setBookYear');
+
     Route::get('receipt/search', 'ReceiptController@index')->name('receipt.search');
     Route::resource('receipt', 'ReceiptController');
 

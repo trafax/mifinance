@@ -19,11 +19,17 @@ class ReceiptController extends Controller
         $groups = Group::where('type', 'receipt')->orderBy('title', 'ASC')->get();
 
         if ($request->get('search')) {
-            $receipts = Receipt::with('group')->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%")->orWhereHas('group', function($q) use ($request) {
-                $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%");
-            })->orderBy('date', 'DESC')->paginate(50)->appends(request()->query());
+
+            $receipts = Receipt::with('group')->where(function($q) use ($request) {
+                $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%")->orWhereHas('group', function($q) use ($request) {
+                    $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%");
+                });
+            })->whereRaw('YEAR(date) = ?', session()->get('bookyear') ?? date('Y'))
+            ->orderBy('date', 'DESC')->paginate(50)->appends(request()->query());
+
         } else {
-            $receipts = Receipt::orderBy('date', 'DESC')->paginate(50);
+
+            $receipts = Receipt::whereRaw('YEAR(date) = ?', session()->get('bookyear') ?? date('Y'))->orderBy('date', 'DESC')->paginate(50);
         }
 
         return view('receipt_index')->with([

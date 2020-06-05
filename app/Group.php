@@ -13,13 +13,21 @@ class Group extends Model
         'title', 'type'
     ];
 
-    public function receipts()
+    public function receipts($year = null)
     {
-        return $this->hasMany(Receipt::class);
+        if ($year != null) {
+            return $this->hasMany(Receipt::class)->whereRaw('YEAR(date) = ?', $year);
+        } else {
+            return $this->hasMany(Receipt::class);
+        }
     }
 
-    public function incomes()
+    public function incomes($year = null)
     {
-        return $this->hasMany(Income::class);
+        if ($year != null) {
+            return $this->hasMany(Income::class)->whereRaw('YEAR(date) = ?', $year);
+        } else {
+            return $this->hasMany(Income::class);
+        }
     }
 }
