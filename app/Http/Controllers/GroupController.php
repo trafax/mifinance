@@ -16,9 +16,10 @@ class GroupController extends Controller
     public function index(Request $request)
     {
         $groups = Group::where('type', array_key_first($request->all()))->orderBy('title', 'ASC')->get();
-        $total = number_format(Group::where('type', array_key_first($request->all()))->with(['receipts' => function($q){
+
+        $total = number_format(Group::where('type', array_key_first($request->all()))->with(['incomes' => function($q){
             $q->whereRaw('YEAR(date) = ?', session()->get('bookyear') ?? date('Y'));
-        }])->get()->pluck('receipts')->collapse()->sum('price'), 2);
+        }])->get()->pluck('incomes')->collapse()->sum('price'), 2);
 
         return view('group_index')->with([
             'groups' => $groups,
