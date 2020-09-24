@@ -53,7 +53,7 @@ class ReceiptController extends Controller
     {
         $receipt = new Receipt();
         //$path = $request->file('file')->store('receipts');
-        $path = $request->file('receipt_file')->store('receipts');
+        $path = $request->file('receipt_file')->store('receipts', 'public');
         $request->request->set('file', $path);
         $receipt->fill($request->all());
         $receipt->save();
