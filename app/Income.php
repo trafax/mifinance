@@ -10,7 +10,7 @@ class Income extends Model
     use SoftDeletes;
 
     public $fillable = [
-        'group_id', 'debtor_id', 'date', 'title', 'description', 'price'
+        'group_id', 'debtor_id', 'date', 'title', 'file', 'description', 'price'
     ];
 
     public function group()

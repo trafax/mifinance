@@ -53,8 +53,8 @@ class ReceiptController extends Controller
     public function store(Request $request)
     {
         $receipt = new Receipt();
-        $path = $request->file('receipt_file')->store('receipts', 'public');
 
+        $path = $request->file('receipt_file')->store('receipts', 'public');
         $allowedMimeTypes = ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
         $contentType = mime_content_type('storage/'.$path);
 
@@ -64,8 +64,8 @@ class ReceiptController extends Controller
             $image->resizeToWidth(450);
             $image->save('storage/'.$path);
         }
-
         $request->request->set('file', $path);
+
         $receipt->fill($request->all());
         $receipt->save();
 

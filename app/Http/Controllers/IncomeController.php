@@ -7,6 +7,7 @@ use App\Group;
 use App\Income;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use \Gumlet\ImageResize;
 
 class IncomeController extends Controller
 {
@@ -49,6 +50,19 @@ class IncomeController extends Controller
     public function store(Request $request)
     {
         $income = new Income();
+
+        $path = $request->file('receipt_file')->store('receipts', 'public');
+        $allowedMimeTypes = ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
+        $contentType = mime_content_type('storage/'.$path);
+
+        if(in_array($contentType, $allowedMimeTypes) ){
+            $image = new ImageResize('storage/'.$path);
+            //$image->scale(50);
+            $image->resizeToWidth(450);
+            $image->save('storage/'.$path);
+        }
+        $request->request->set('file', $path);
+
         $income->fill($request->all());
         $income->save();
 
@@ -82,6 +96,23 @@ class IncomeController extends Controller
      */
     public function update(Request $request, Income $income)
     {
+        if ($request->has('receipt_file')) {
+
+            $path = $request->file('receipt_file')->store('receipts', 'public');
+
+            $allowedMimeTypes = ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
+            $contentType = mime_content_type('storage/'.$path);
+
+            if(in_array($contentType, $allowedMimeTypes) ){
+                $image = new ImageResize('storage/'.$path);
+                //$image->scale(50);
+                $image->resizeToWidth(450);
+                $image->save('storage/'.$path);
+            }
+
+            $request->request->set('file', $path);
+        }
+
         $income->fill($request->all());
         $income->save();
 

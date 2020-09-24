@@ -48,6 +48,9 @@
                             </div>
                             <div class="text-right flex-grow-1 h5 mt-2">
                                 € {{ number_format($income->price, 2) }}
+                                @if ($income->file)
+                                    <a href="{{ asset('storage/'.$income->file) }}" class="ml-2"><i class="fas fa-receipt"></i></a>
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -71,7 +74,7 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="create">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form method="post" action="{{ route('income.store') }}">
+            <form method="post" action="{{ route('income.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">Inkomen toevoegen</h5>
@@ -98,6 +101,14 @@
                         <label>Datum</label>
                         <div class="datepicker"></div>
                         <input type="hidden" name="date" value="{{ date('yy-m-d') }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Factuur</label>
+                        <div class="custom-file">
+                            <input type="file" name="receipt_file" class="custom-file-input" id="validatedCustomFile">
+                            <label class="custom-file-label" for="validatedCustomFile">Upload factuur...</label>
+                            <div class="invalid-feedback"></div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col">
