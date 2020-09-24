@@ -70,9 +70,12 @@ class ReceiptController extends Controller
     {
         $groups = Group::where('type', 'receipt')->orderBy('title', 'ASC')->get();
 
+        $receipt_nr = Str::lower(Str::random(5));
+
         return view('receipt_edit')->with([
             'receipt' => $receipt,
-            'groups' => $groups
+            'groups' => $groups,
+            'receipt_nr' => $receipt_nr
         ]);
     }
 

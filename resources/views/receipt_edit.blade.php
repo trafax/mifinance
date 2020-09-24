@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             <label>Bonnummer</label>
-                            <input type="text" name="receipt_nr" value="{{ $receipt->receipt_nr }}" class="form-control">
+                            <input type="text" name="receipt_nr" value="{{ $receipt->receipt_nr ? $receipt->receipt_nr : $receipt_nr }}" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Bon</label>
