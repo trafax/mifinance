@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use \Gumlet\ImageResize;
 
 class ReceiptController extends Controller
 {
@@ -90,6 +91,11 @@ class ReceiptController extends Controller
     {
         if ($request->has('receipt_file')) {
             $path = $request->file('receipt_file')->store('receipts', 'public');
+            //Image::make($request->file('receipt_file')->getRealPath())->resize(200)->save($path);
+            $image = new ImageResize('storage/'.$path);
+            //$image->scale(50);
+            $image->resizeToWidth(750);
+            $image->save('storage/'.$path);
             $request->request->set('file', $path);
         }
         $receipt->fill($request->all());
