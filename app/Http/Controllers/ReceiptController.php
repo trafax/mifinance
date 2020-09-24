@@ -54,6 +54,10 @@ class ReceiptController extends Controller
     {
         $receipt = new Receipt();
         $path = $request->file('receipt_file')->store('receipts', 'public');
+        $image = new ImageResize('storage/'.$path);
+            //$image->scale(50);
+        $image->resizeToWidth(750);
+        $image->save('storage/'.$path);
         $request->request->set('file', $path);
         $receipt->fill($request->all());
         $receipt->save();
