@@ -54,10 +54,17 @@ class ReceiptController extends Controller
     {
         $receipt = new Receipt();
         $path = $request->file('receipt_file')->store('receipts', 'public');
-        $image = new ImageResize('storage/'.$path);
+
+        $allowedMimeTypes = ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
+        $contentType = mime_content_type('storage/'.$path);
+
+        if(in_array($contentType, $allowedMimeTypes) ){
+            $image = new ImageResize('storage/'.$path);
             //$image->scale(50);
-        $image->resizeToWidth(750);
-        $image->save('storage/'.$path);
+            $image->resizeToWidth(750);
+            $image->save('storage/'.$path);
+        }
+
         $request->request->set('file', $path);
         $receipt->fill($request->all());
         $receipt->save();
@@ -94,12 +101,19 @@ class ReceiptController extends Controller
     public function update(Request $request, Receipt $receipt)
     {
         if ($request->has('receipt_file')) {
+
             $path = $request->file('receipt_file')->store('receipts', 'public');
-            //Image::make($request->file('receipt_file')->getRealPath())->resize(200)->save($path);
-            $image = new ImageResize('storage/'.$path);
-            //$image->scale(50);
-            $image->resizeToWidth(750);
-            $image->save('storage/'.$path);
+
+            $allowedMimeTypes = ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
+            $contentType = mime_content_type('storage/'.$path);
+
+            if(in_array($contentType, $allowedMimeTypes) ){
+                $image = new ImageResize('storage/'.$path);
+                //$image->scale(50);
+                $image->resizeToWidth(750);
+                $image->save('storage/'.$path);
+            }
+
             $request->request->set('file', $path);
         }
         $receipt->fill($request->all());
