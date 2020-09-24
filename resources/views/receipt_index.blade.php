@@ -49,7 +49,7 @@
                             <div class="text-right flex-grow-1 h5 mt-2">
                                 € {{ number_format($receipt->price, 2) }}
                                 @if ($receipt->file)
-                                    <a href="{{ $receipt->file }}" class="ml-2"><i class="fas fa-receipt"></i></a>
+                                    <a href="{{ asset('storage/'.$receipt->file) }}" class="ml-2"><i class="fas fa-receipt"></i></a>
                                 @endif
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                         <h3>{{ $receipt_nr }}</h3>
                     </div>
                     <div class="custom-file mb-3">
-                        <input type="file" name="file" class="custom-file-input" id="validatedCustomFile">
+                        <input type="file" name="receipt_file" class="custom-file-input" id="validatedCustomFile">
                         <label class="custom-file-label" for="validatedCustomFile">Upload bonnetje...</label>
                         <div class="invalid-feedback"></div>
                       </div>
