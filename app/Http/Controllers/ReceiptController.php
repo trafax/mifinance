@@ -61,7 +61,7 @@ class ReceiptController extends Controller
         if(in_array($contentType, $allowedMimeTypes) ){
             $image = new ImageResize('storage/'.$path);
             //$image->scale(50);
-            $image->resizeToWidth(750);
+            $image->resizeToWidth(450);
             $image->save('storage/'.$path);
         }
 
@@ -110,7 +110,7 @@ class ReceiptController extends Controller
             if(in_array($contentType, $allowedMimeTypes) ){
                 $image = new ImageResize('storage/'.$path);
                 //$image->scale(50);
-                $image->resizeToWidth(750);
+                $image->resizeToWidth(450);
                 $image->save('storage/'.$path);
             }
 
