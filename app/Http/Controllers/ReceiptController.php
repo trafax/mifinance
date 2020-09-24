@@ -52,7 +52,6 @@ class ReceiptController extends Controller
     public function store(Request $request)
     {
         $receipt = new Receipt();
-        //$path = $request->file('file')->store('receipts');
         $path = $request->file('receipt_file')->store('receipts', 'public');
         $request->request->set('file', $path);
         $receipt->fill($request->all());
