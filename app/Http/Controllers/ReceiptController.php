@@ -6,6 +6,8 @@ use App\Group;
 use App\Receipt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ReceiptController extends Controller
 {
@@ -32,9 +34,12 @@ class ReceiptController extends Controller
             $receipts = Receipt::whereRaw('YEAR(date) = ?', session()->get('bookyear') ?? date('Y'))->orderBy('date', 'DESC')->paginate(50);
         }
 
+        $receipt_nr = Str::lower(Str::random(5));
+
         return view('receipt_index')->with([
             'groups' => $groups,
-            'receipts' => $receipts
+            'receipts' => $receipts,
+            'receipt_nr' => $receipt_nr
         ]);
     }
 
@@ -47,6 +52,7 @@ class ReceiptController extends Controller
     public function store(Request $request)
     {
         $receipt = new Receipt();
+        $path = $request->file('file')->store('receipts');
         $receipt->fill($request->all());
         $receipt->save();
 

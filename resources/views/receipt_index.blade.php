@@ -43,11 +43,14 @@
                             </div>
                             <div class="flex-grow-1 w-50">
                                 <div class="d-inline">{{ $receipt->title }}
-                                    <div class="d-block text-muted">{{ $receipt->group->title }}</div>
+                                    <div class="d-block text-muted">@if ($receipt->receipt_nr) Bonnr: {{ $receipt->receipt_nr }} - @endif Groep: {{ $receipt->group->title }}</div>
                                 </div>
                             </div>
                             <div class="text-right flex-grow-1 h5 mt-2">
                                 € {{ number_format($receipt->price, 2) }}
+                                @if ($receipt->file)
+                                    <a href="{{ $receipt->file }}" class="ml-2"><i class="fas fa-receipt"></i></a>
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -71,7 +74,7 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="create">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form method="post" action="{{ route('receipt.store') }}">
+            <form method="post" action="{{ route('receipt.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">Bonnetje toevoegen</h5>
@@ -99,6 +102,15 @@
                         <div class="datepicker"></div>
                         <input type="hidden" name="date" value="{{ date('yy-m-d') }}">
                     </div>
+                    <div class="form-group">
+                        <label>Bonnummer</label>
+                        <h3>{{ $receipt_nr }}</h3>
+                    </div>
+                    <div class="custom-file mb-3">
+                        <input type="file" name="file" class="custom-file-input" id="validatedCustomFile">
+                        <label class="custom-file-label" for="validatedCustomFile">Upload bonnetje...</label>
+                        <div class="invalid-feedback"></div>
+                      </div>
                     <div class="form-group">
                         <label>Groep</label>
                         <select name="group_id" class="form-control">
@@ -130,6 +142,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" name="receipt_nr" value="{{ $receipt_nr }}">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit</button>
                     <button type="submit" class="btn btn-primary">Bonnetje opslaan</button>
                 </div>

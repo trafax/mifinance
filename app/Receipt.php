@@ -10,7 +10,7 @@ class Receipt extends Model
     use SoftDeletes;
 
     public $fillable = [
-        'group_id', 'date', 'title', 'description', 'price', 'paid_out'
+        'group_id', 'date', 'receipt_nr', 'file', 'title', 'description', 'price', 'paid_out'
     ];
 
     public function group()
