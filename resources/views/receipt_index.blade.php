@@ -43,7 +43,7 @@
                             </div>
                             <div class="flex-grow-1 w-50">
                                 <div class="d-inline">{{ $receipt->title }}
-                                    <div class="d-block text-muted">@if ($receipt->receipt_nr) Bonnr: {{ $receipt->receipt_nr }} - @endif Groep: {{ $receipt->group->title }}</div>
+                                    <div class="d-block text-muted">@if ($receipt->receipt_nr) Bonnr: {{ $receipt->receipt_nr }} - @endif Groep: {{ $receipt->group->title }} - Rekening: {{ $receipt->paid_out == 'private' ? 'Privé' : 'Zakelijk' }}</div>
                                 </div>
                             </div>
                             <div class="text-right flex-grow-1 h5 mt-2">
