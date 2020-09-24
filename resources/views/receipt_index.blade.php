@@ -106,11 +106,14 @@
                         <label>Bonnummer</label>
                         <h3>{{ $receipt_nr }}</h3>
                     </div>
-                    <div class="custom-file mb-3">
-                        <input type="file" name="receipt_file" class="custom-file-input" id="validatedCustomFile">
-                        <label class="custom-file-label" for="validatedCustomFile">Upload bonnetje...</label>
-                        <div class="invalid-feedback"></div>
-                      </div>
+                    <div class="form-group">
+                        <label>Bon</label>
+                        <div class="custom-file">
+                            <input type="file" name="receipt_file" class="custom-file-input" id="validatedCustomFile">
+                            <label class="custom-file-label" for="validatedCustomFile">Upload bonnetje...</label>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>Groep</label>
                         <select name="group_id" class="form-control">

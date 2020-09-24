@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="post" action="{{ route('receipt.update', $receipt) }}">
+<form method="post" action="{{ route('receipt.update', $receipt) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="container">
@@ -46,6 +46,18 @@
                             <label>Datum bonnetje</label>
                             <div class="datepicker"></div>
                             <input type="hidden" name="date" value="{{ $receipt->date }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Bonnummer</label>
+                            <input type="text" name="receipt_nr" value="{{ $receipt->receipt_nr }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Bon</label>
+                            <div class="custom-file">
+                                <input type="file" name="receipt_file" class="custom-file-input" id="validatedCustomFile">
+                                <label class="custom-file-label" for="validatedCustomFile">Upload bonnetje...</label>
+                                <div class="invalid-feedback"></div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Groep</label>
