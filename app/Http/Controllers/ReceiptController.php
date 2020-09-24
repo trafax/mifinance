@@ -119,7 +119,7 @@ class ReceiptController extends Controller
         $receipt->fill($request->all());
         $receipt->save();
 
-        return redirect()->back()->with('status', 'Bonnetje succesvol aangepast.');
+        return redirect()->route('receipt.index')->with('status', 'Bonnetje succesvol aangepast.');
     }
 
     /**
