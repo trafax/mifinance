@@ -42,7 +42,7 @@
                                 <div class="ml-2 d-inline">{{ date('d-m-Y', strtotime($receipt->date)) }}</div>
                             </div>
                             <div class="flex-grow-1 w-50">
-                                <div class="d-inline">{{ $receipt->title }}
+                                <div class="d-inline"><a href="{{ route('receipt.edit', $receipt->id) }}">{{ $receipt->title }}</a>
                                     <div class="d-block text-muted">@if ($receipt->receipt_nr) Bonnr: {{ $receipt->receipt_nr }} - @endif Groep: {{ $receipt->group->title }} - Rekening: {{ $receipt->paid_out == 'private' ? 'Privé' : 'Zakelijk' }}</div>
                                 </div>
                             </div>
