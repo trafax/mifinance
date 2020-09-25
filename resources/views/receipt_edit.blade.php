@@ -4,6 +4,9 @@
 <form method="post" action="{{ route('receipt.update', $receipt) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
+
+    <input type="hidden" name="referrer" value="{{ request()->headers->get('referer') }}">
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
