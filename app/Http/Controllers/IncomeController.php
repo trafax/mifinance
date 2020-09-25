@@ -51,18 +51,19 @@ class IncomeController extends Controller
     {
         $income = new Income();
 
-        $path = $request->file('receipt_file')->store('receipts', 'public');
-        $allowedMimeTypes = ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
-        $contentType = mime_content_type('storage/'.$path);
+        if ($request->has('receipt_file')) {
+            $path = $request->file('receipt_file')->store('receipts', 'public');
+            $allowedMimeTypes = ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
+            $contentType = mime_content_type('storage/'.$path);
 
-        if(in_array($contentType, $allowedMimeTypes) ){
-            $image = new ImageResize('storage/'.$path);
-            //$image->scale(50);
-            $image->resizeToWidth(450);
-            $image->save('storage/'.$path);
+            if(in_array($contentType, $allowedMimeTypes) ){
+                $image = new ImageResize('storage/'.$path);
+                //$image->scale(50);
+                $image->resizeToWidth(450);
+                $image->save('storage/'.$path);
+            }
+            $request->request->set('file', $path);
         }
-        $request->request->set('file', $path);
-
         $income->fill($request->all());
         $income->save();
 
