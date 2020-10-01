@@ -24,7 +24,7 @@ class ReceiptController extends Controller
         if ($request->get('search')) {
 
             $receipts = Receipt::with('group')->where(function($q) use ($request) {
-                $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%")->orWhereHas('group', function($q) use ($request) {
+                $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%")->orWhere('price', $request->get('search'))->orWhereHas('group', function($q) use ($request) {
                     $q->whereRaw('lower(title) LIKE ?', "%".strtolower($request->get('search'))."%");
                 });
             })->whereRaw('YEAR(date) = ?', session()->get('bookyear') ?? date('Y'))
