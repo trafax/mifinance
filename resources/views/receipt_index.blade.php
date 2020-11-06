@@ -137,8 +137,8 @@
                             <div class="form-group">
                                 <label>Betaald vanuit</label>
                                 <select name="paid_out" class="form-control">
-                                    <option value="private">Privé rekening</option>
                                     <option value="business">Zakelijke rekening</option>
+                                    <option value="private">Privé rekening</option>
                                 </select>
                             </div>
                         </div>
