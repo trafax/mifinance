@@ -113,7 +113,7 @@
                     </div>
                     <div class="form-group">
                         <label>Bonnummer</label>
-                        <h3>{{ $receipt_nr }}</h3>
+                        <h3>{{ strtoupper($receipt_nr) }}</h3>
                     </div>
                     <div class="form-group">
                         <label>Bon</label>
