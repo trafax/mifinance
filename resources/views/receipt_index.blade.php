@@ -85,10 +85,19 @@
                 <div class="modal-body">
                     <script>
                         window.onload = function () {
+
+                            var currentTime = new Date()
+                            var minDate = new Date(currentTime.getYear(), currentTime.getMonth()-1); //previous month
+                            var maxDate =  new Date(currentTime.getFullYear(),currentTime.getMonth()); // this month
+
                             $('.datepicker').datepicker({
                                 maxDate: '+30d',
-                                numberOfMonths: 3,
+                                numberOfMonths: 2,
                                 dateFormat: "yy-mm-dd",
+                                showOtherMonths: true,
+                                minDate: minDate,
+                                maxDate: maxDate,
+                                autoSize: true,
                                 changeMonth: true,
                                 changeYear: true,
                                 onSelect: function(date){
