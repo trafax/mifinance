@@ -37,6 +37,11 @@ class DebtorController extends Controller
         return redirect()->back()->with('status', 'Debiteur succesvol toegevoegd.');
     }
 
+    public function edit(Debtor $debtor)
+    {
+        return view('debtor_edit')->with('debtor', $debtor);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -49,7 +54,7 @@ class DebtorController extends Controller
         $debtor->fill($request->all());
         $debtor->save();
 
-        echo 'done';
+        return redirect()->route('debtor.index')->with('status', 'Debiteur succesvol toegevoegd.');
     }
 
     /**

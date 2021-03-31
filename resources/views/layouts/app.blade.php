@@ -39,6 +39,7 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Dashboard</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('receipt.index') }}">Bonnetjes</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('income.index') }}">Inkomsten</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('invoice.index') }}">Facturen</a></li>
                         @endif
                     </ul>
 

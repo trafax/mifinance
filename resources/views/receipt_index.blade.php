@@ -109,7 +109,7 @@
                     <div class="form-group">
                         <label>Datum bonnetje</label>
                         <div class="datepicker"></div>
-                        <input type="hidden" name="date" value="{{ date('yy-m-d') }}">
+                        <input type="hidden" name="date" value="{{ date('yy-mm-dd') }}">
                     </div>
                     <div class="form-group">
                         <label>Bonnummer</label>

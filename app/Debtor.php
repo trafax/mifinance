@@ -10,7 +10,7 @@ class Debtor extends Model
     use SoftDeletes;
 
     public $fillable = [
-        'title'
+        'title', 'address'
     ];
 
     public function incomes($year = null)

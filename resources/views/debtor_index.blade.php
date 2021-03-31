@@ -27,8 +27,8 @@
 
                     @foreach($debtors as $debtor)
                         <div class="d-flex py-2 {{ ! $loop->last ? 'border-bottom' : '' }}">
-                            <div class="w-25">
-                                <a href="javascript:;" onclick="window.edit('{{ $debtor->id }}')"><i class="far fa-edit"></i></a>
+                            <div class="w-50">
+                                <a href="{{ route('debtor.edit', $debtor) }}"><i class="far fa-edit"></i></a>
                                 <a href="javascript:;" onclick="window.delete('{{ $debtor->id }}')"><i class="far fa-minus-circle"></i></a>
                                 <div id="row_{{ $debtor->id }}" class="d-inline ml-2" data-original-content="{{ $debtor->title }}">{{ $debtor->title }}</div>
                             </div>
