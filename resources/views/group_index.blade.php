@@ -30,7 +30,15 @@
 
                     @foreach($groups as $group)
 
-                        @php $sum = array_key_first(request()->all()) == 'income' ? $group->incomes(session()->get('bookyear') ?? date('Y'))->sum('price') : $group->receipts(session()->get('bookyear') ?? date('Y'))->sum('price'); @endphp
+                        @php
+                            if (array_key_first(request()->all()) == 'income'){
+                                $sum_business = $group->incomes(session()->get('bookyear') ?? date('Y'))->sum('price');
+                                $sum_private = 0;
+                            } else {
+                                $sum_business = $group->receipts(session()->get('bookyear') ?? date('Y'))->where('paid_out', 'business')->sum('price');
+                                $sum_private = $group->receipts(session()->get('bookyear') ?? date('Y'))->where('paid_out', 'private')->sum('price');
+                            }
+                        @endphp
 
                         <div class="d-flex py-2 border-bottom">
                             <div class="flex-grow-1">
@@ -39,7 +47,15 @@
                                 <div id="row_{{ $group->id }}" class="d-inline ml-2" data-original-content="{{ $group->title }}">{{ $group->title }}</div>
                             </div>
                             <div class="text-right w-25">
-                                <label class="h3 mb-0">€ {{ number_format($sum, 2) }}</label>
+                                <label class="h4 mb-2">
+                                    <span class="small">Zakelijk</span>
+                                    € {{ number_format($sum_business, 2) }}
+                                </label>
+                                <br>
+                                <label class="h4 mb-0">
+                                    <span class="small">Privé</span>
+                                    € {{ number_format($sum_private, 2) }}
+                                </label>
                                 {{-- <span class="d-block text-muted">Uitgegeven</span> --}}
                             </div>
                             {{-- <div class="text-right w-25">

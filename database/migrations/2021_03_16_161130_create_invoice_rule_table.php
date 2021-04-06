@@ -16,7 +16,7 @@ class CreateInvoiceRuleTable extends Migration
         Schema::create('invoice_rule', function (Blueprint $table) {
             $table->integer('invoice_id');
             $table->string('title');
-            $table->integer('qty')->default(1);
+            $table->string('qty')->default(1);
             $table->decimal('price')->default(0);
         });
     }
