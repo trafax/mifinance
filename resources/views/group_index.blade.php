@@ -44,7 +44,15 @@
                             <div class="flex-grow-1">
                                 <a href="javascript:;" onclick="window.edit('{{ $group->id }}')"><i class="far fa-edit"></i></a>
                                 <a href="javascript:;" onclick="window.delete('{{ $group->id }}')"><i class="far fa-minus-circle"></i></a>
-                                <div id="row_{{ $group->id }}" class="d-inline ml-2" data-original-content="{{ $group->title }}">{{ $group->title }}</div>
+
+                                @if (array_key_first(request()->all()) == 'receipt')
+                                    <a class="ml-1" href="{{ route('receipt.index') }}?search={{ $group->title }}" title="Bekijk gekoppelde bonnetjes"><i class="far fa-receipt"></i></a>
+                                @endif
+
+                                <div id="row_{{ $group->id }}" class="d-inline ml-2" data-original-content="{{ $group->title }}">
+                                    {{ $group->title }}
+                                    {{-- <a href="" class="d-block">Bekijk bonnetjes</a> --}}
+                                </div>
                             </div>
                             <div class="text-right w-25">
                                 <label class="h4 mb-2">
